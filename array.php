@@ -111,6 +111,44 @@
             border-radius: 10px;
             display: inline-block;
         }
+        /* CSS Baru untuk Commit 2 */
+        .transaction-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid rgb(219, 173, 168);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .item-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        
+        .item-details {
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        
+        .item-total {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .total-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        
     </style>
 </head>
 <body>
@@ -148,5 +186,56 @@
             </div>
         </div>
     </div>
+    <?php
+
+?>
+
+   
+            
+            
+           
+
+            <!-- COMMIT 2 - LOGIKA PEMBELIAN -->
+            <?php
+            $pembelian = [];
+            $grand_total = 0;
+            $jumlah_item_dibeli = rand(2, 4);
+
+            for ($i = 0; $i < $jumlah_item_dibeli; $i++) {
+                $random_barang = rand(0, 4);
+                $random_jumlah = rand(1, 3);
+                $total_item = $barang[$random_barang][1] * $random_jumlah;
+                $grand_total += $total_item;
+                
+                $pembelian[] = [
+                    'nama' => $barang[$random_barang][0],
+                    'harga' => $barang[$random_barang][1],
+                    'jumlah' => $random_jumlah,
+                    'total' => $total_item
+                ];
+            }
+            ?>
+
+            <div class="section">
+                <div class="section-title"> DETAIL PEMBELIAN</div>
+                
+                <?php foreach ($pembelian as $item): ?>
+                <div class="transaction-item">
+                    <div class="item-name"><?= $item['nama'] ?></div>
+                    <div class="item-details">
+                        <?= $item['jumlah'] ?> pcs × Rp <?= number_format($item['harga'], 0, ',', '.') ?>
+                    </div>
+                    <div class="item-total">Rp <?= number_format($item['total'], 0, ',', '.') ?></div>
+                </div>
+                <?php endforeach; ?>
+
+                <div style="margin-top: 20px; padding: 15px; background: #2ecc71; color: white; border-radius: 8px; text-align: center;">
+                    <strong>TOTAL: Rp <?= number_format($grand_total, 0, ',', '.') ?></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
