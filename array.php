@@ -147,9 +147,88 @@
             font-weight: bold;
             font-size: 1.2em;
         }
+        .receipt {
+            background: white;
+            border: 2px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+        }
         
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px solid rgb(219, 173, 168);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
         
+        .receipt-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .receipt-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 0.9em;
+        }
+        
+        .receipt-items {
+            margin: 15px 0;
+        }
+        
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 3px 0;
+        }
+        
+        .receipt-divider {
+            border-top: 1px dashed #7f8c8d;
+            margin: 10px 0;
+        }
+        
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1em;
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .receipt-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .print-btn {
+            background: linear-gradient(135deg, rgb(219, 173, 168), rgb(204, 149, 177));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(219, 173, 168, 0.4);
+        }
     </style>
+
+    
 </head>
 <body>
     <div class="container">
@@ -236,6 +315,60 @@
         </div>
     </div>
 
-
+<!-- COMMIT 4: Struk Belanja -->
+<div class="section">
+                <div class="section-title">🧾 STRUK BELANJA</div>
+                
+                <div class="receipt">
+                    <div class="receipt-header">
+                        <div class="receipt-title">POLGAN MART</div>
+                        <div>Toko Serba Ada</div>
+                    </div>
+                    
+                    <div class="receipt-info">
+                        <span>No. Transaksi:</span>
+                        <span><?= $transaction_id ?></span>
+                    </div>
+                    <div class="receipt-info">
+                        <span>Tanggal:</span>
+                        <span><?= $current_date ?></span>
+                    </div>
+                    <div class="receipt-info">
+                        <span>Kasir:</span>
+                        <span>System Auto</span>
+                    </div>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <div class="receipt-items">
+                        <?php foreach ($pembelian as $item): ?>
+                        <div class="receipt-item">
+                            <span><?= $item['nama'] ?> x<?= $item['jumlah'] ?></span>
+                            <span>Rp <?= number_format($item['total'], 0, ',', '.') ?></span>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    
+                    <div class="receipt-divider"></div>
+                    
+                    <div class="receipt-total">
+                        <span>TOTAL:</span>
+                        <span>Rp <?= number_format($grand_total, 0, ',', '.') ?></span>
+                    </div>
+                    
+                    <div class="receipt-info">
+                        <span>Items:</span>
+                        <span><?= $total_quantity ?> pcs</span>
+                    </div>
+                    
+                    <div class="receipt-footer">
+                        Terima kasih atas kunjungan Anda!<br>
+                        *** Barang yang sudah dibeli tidak dapat ditukar ***
+                    </div>
+                </div>
+                
+                        </div>
+        </div>
+    </div>
 </body>
 </html>
