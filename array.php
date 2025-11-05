@@ -1,6 +1,6 @@
 <?php
 // COMMIT 1 - SETUP AWAL POLGAN MART
-// Tanpa kode barang, hanya nama, harga, kategori
+// DENGAN KODE BARANG - [kode, nama, harga, kategori]
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -37,7 +37,7 @@
             color: white;
             text-align: center;
             padding: 25px;
-            border-bottom: 5px solidrgb(219, 173, 168);
+            border-bottom: 5px solid rgb(219, 173, 168);
         }
         
         .header h1 {
@@ -89,6 +89,18 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
+        /* TAMBAHAN: CSS untuk kode barang */
+        .product-code {
+            font-size: 0.8em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 5px;
+            padding: 2px 6px;
+            background: #ffeaa7;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
         .product-name {
             font-weight: bold;
             color: #2c3e50;
@@ -111,7 +123,8 @@
             border-radius: 10px;
             display: inline-block;
         }
-        /* CSS Baru untuk Commit 2 */
+
+        /* CSS untuk transaksi */
         .transaction-item {
             background: white;
             padding: 15px;
@@ -119,6 +132,14 @@
             border-radius: 8px;
             border-left: 4px solid rgb(219, 173, 168);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* TAMBAHAN: CSS untuk kode barang di transaksi */
+        .item-code {
+            font-size: 0.8em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 3px;
         }
         
         .item-name {
@@ -137,6 +158,7 @@
             font-weight: bold;
             font-size: 1.1em;
         }
+        
         .total-box {
             margin-top: 20px;
             padding: 15px;
@@ -147,6 +169,8 @@
             font-weight: bold;
             font-size: 1.2em;
         }
+        
+        /* CSS untuk struk */
         .receipt {
             background: white;
             border: 2px dashed #bdc3c7;
@@ -220,6 +244,9 @@
             cursor: pointer;
             margin-top: 15px;
             transition: all 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .print-btn:hover {
@@ -227,8 +254,6 @@
             box-shadow: 0 5px 15px rgba(219, 173, 168, 0.4);
         }
     </style>
-
-    
 </head>
 <body>
     <div class="container">
@@ -239,67 +264,67 @@
         
         <div class="content">
             <?php
-            // Array multidimensi tanpa kode barang [nama, harga, kategori]
+            // PERBAIKAN 1: Array dengan kode barang [kode, nama, harga, kategori]
             $barang = [
-                ["BUKU TULIS", 5000, "Alat Tulis"],
-                ["PENSIL 2B", 2000, "Alat Tulis"],
-                ["PULPEN STANDARD", 1500, "Alat Tulis"],
-                ["PENGGARIS 30CM", 3000, "Alat Tulis"],
-                ["SPIDOL WHITEBOARD", 7000, "Alat Tulis"]
+                ["AT001", "BUKU TULIS", 5000, "Alat Tulis"],
+                ["AT002", "PENSIL 2B", 2000, "Alat Tulis"],
+                ["AT003", "PULPEN STANDARD", 1500, "Alat Tulis"],
+                ["AT004", "PENGGARIS 30CM", 3000, "Alat Tulis"],
+                ["AT005", "SPIDOL WHITEBOARD", 7000, "Alat Tulis"]
             ];
-            ?>
-            
-            <div class="section">
-                <div class="section-title">
-                     DAFTAR BARANG POLGAN MART
-                </div>
-                <div class="product-grid">
-                    <?php foreach ($barang as $item): ?>
-                    <div class="product-card">
-                        <div class="product-name"><?= $item[0] ?></div>
-                        <div class="product-price">Rp <?= number_format($item[1], 0, ',', '.') ?></div>
-                        <div class="product-category"><?= $item[2] ?></div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php
 
-?>
-
-   
-            
-            
-           
-
-            <!-- COMMIT 2 - LOGIKA PEMBELIAN -->
-            <?php
+            // COMMIT 2 - LOGIKA PEMBELIAN
             $pembelian = [];
             $grand_total = 0;
+            $total_quantity = 0;
             $jumlah_item_dibeli = rand(2, 4);
 
             for ($i = 0; $i < $jumlah_item_dibeli; $i++) {
                 $random_barang = rand(0, 4);
                 $random_jumlah = rand(1, 3);
-                $total_item = $barang[$random_barang][1] * $random_jumlah;
+                // PERBAIKAN 2: Index harga yang benar adalah [2], bukan [1]
+                $total_item = $barang[$random_barang][2] * $random_jumlah;
                 $grand_total += $total_item;
+                $total_quantity += $random_jumlah;
                 
                 $pembelian[] = [
-                    'nama' => $barang[$random_barang][0],
-                    'harga' => $barang[$random_barang][1],
+                    'kode' => $barang[$random_barang][0],  // Kode barang
+                    'nama' => $barang[$random_barang][1],  // Nama barang
+                    'harga' => $barang[$random_barang][2], // Harga barang
                     'jumlah' => $random_jumlah,
                     'total' => $total_item
                 ];
             }
-            ?>
 
+            // Data untuk struk
+            $transaction_id = "PM" . date('YmdHis') . rand(100, 999);
+            $current_date = date('d/m/Y H:i:s');
+            ?>
+            
+            <!-- Daftar Barang -->
             <div class="section">
-                <div class="section-title"> DETAIL PEMBELIAN</div>
+                <div class="section-title">📦 DAFTAR BARANG POLGAN MART</div>
+                <div class="product-grid">
+                    <?php foreach ($barang as $item): ?>
+                    <div class="product-card">
+                        <!-- PERBAIKAN 3: Menampilkan kode barang -->
+                        <div class="product-code">Kode: <?= $item[0] ?></div>
+                        <div class="product-name"><?= $item[1] ?></div>
+                        <div class="product-price">Rp <?= number_format($item[2], 0, ',', '.') ?></div>
+                        <div class="product-category"><?= $item[3] ?></div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- Detail Pembelian -->
+            <div class="section">
+                <div class="section-title">🛒 DETAIL PEMBELIAN</div>
                 
                 <?php foreach ($pembelian as $item): ?>
                 <div class="transaction-item">
+                    <!-- PERBAIKAN 4: Menampilkan kode barang di transaksi -->
+                    <div class="item-code">Kode: <?= $item['kode'] ?></div>
                     <div class="item-name"><?= $item['nama'] ?></div>
                     <div class="item-details">
                         <?= $item['jumlah'] ?> pcs × Rp <?= number_format($item['harga'], 0, ',', '.') ?>
@@ -308,15 +333,13 @@
                 </div>
                 <?php endforeach; ?>
 
-                <div style="margin-top: 20px; padding: 15px; background: #2ecc71; color: white; border-radius: 8px; text-align: center;">
-                    <strong>TOTAL: Rp <?= number_format($grand_total, 0, ',', '.') ?></strong>
+                <div class="total-box">
+                    TOTAL: Rp <?= number_format($grand_total, 0, ',', '.') ?>
                 </div>
             </div>
-        </div>
-    </div>
 
-<!-- COMMIT 4: Struk Belanja -->
-<div class="section">
+            <!-- Struk Belanja -->
+            <div class="section">
                 <div class="section-title">🧾 STRUK BELANJA</div>
                 
                 <div class="receipt">
@@ -367,7 +390,7 @@
                     </div>
                 </div>
                 
-                        </div>
+              
         </div>
     </div>
 </body>
