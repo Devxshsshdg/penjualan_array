@@ -9,20 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POLGAN MART</title>
     <style>
-        /* COMMIT 1 - CSS DASAR */
+        /* CSS tetap sama seperti sebelumnya */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-        
         body {
             background: linear-gradient(135deg,rgb(223, 151, 207) 0%,rgb(223, 164, 213) 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -31,7 +29,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        
         .header {
             background: linear-gradient(135deg,rgb(204, 149, 177), #34495e);
             color: white;
@@ -39,22 +36,11 @@
             padding: 25px;
             border-bottom: 5px solid rgb(219, 173, 168);
         }
-        
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 30px;
-        }
-        
+        .content { padding: 30px; }
         .section {
             margin-bottom: 30px;
             padding: 20px;
@@ -62,7 +48,6 @@
             border-radius: 10px;
             background: #f8f9fa;
         }
-        
         .section-title {
             color: #2c3e50;
             font-size: 1.5em;
@@ -73,14 +58,12 @@
             align-items: center;
             gap: 10px;
         }
-        
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
-        
         .product-card {
             background: white;
             padding: 15px;
@@ -88,8 +71,6 @@
             border-left: 4px solid #3498db;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        /* TAMBAHAN: CSS untuk kode barang */
         .product-code {
             font-size: 0.8em;
             color: #e74c3c;
@@ -100,20 +81,8 @@
             border-radius: 5px;
             display: inline-block;
         }
-        
-        .product-name {
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
-        
-        .product-price {
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        
+        .product-name { font-weight: bold; color: #2c3e50; margin: 5px 0; font-size: 1.1em; }
+        .product-price { color:rgb(221, 168, 199); font-weight: bold; font-size: 1.1em; }
         .product-category {
             font-size: 0.8em;
             color: #7f8c8d;
@@ -123,8 +92,6 @@
             border-radius: 10px;
             display: inline-block;
         }
-
-        /* CSS untuk transaksi */
         .transaction-item {
             background: white;
             padding: 15px;
@@ -133,44 +100,20 @@
             border-left: 4px solid rgb(219, 173, 168);
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        
-        /* TAMBAHAN: CSS untuk kode barang di transaksi */
-        .item-code {
-            font-size: 0.8em;
-            color: #e74c3c;
-            font-weight: bold;
-            margin-bottom: 3px;
-        }
-        
-        .item-name {
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 1.1em;
-        }
-        
-        .item-details {
-            color: #7f8c8d;
-            margin: 5px 0;
-        }
-        
-        .item-total {
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        
+        .item-code { font-size: 0.8em; color: #e74c3c; font-weight: bold; margin-bottom: 3px; }
+        .item-name { font-weight: bold; color: #2c3e50; font-size: 1.1em; }
+        .item-details { color: #7f8c8d; margin: 5px 0; }
+        .item-total { color:rgb(197, 105, 133); font-weight: bold; font-size: 1.1em; }
         .total-box {
             margin-top: 20px;
             padding: 15px;
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg,rgb(187, 115, 149),rgb(196, 68, 68));
             color: white;
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
             font-size: 1.2em;
         }
-        
-        /* CSS untuk struk */
         .receipt {
             background: white;
             border: 2px dashed #bdc3c7;
@@ -179,43 +122,27 @@
             margin-top: 20px;
             font-family: 'Courier New', monospace;
         }
-        
         .receipt-header {
             text-align: center;
             border-bottom: 2px solid rgb(219, 173, 168);
             padding-bottom: 15px;
             margin-bottom: 15px;
         }
-        
-        .receipt-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
+        .receipt-title { font-size: 1.8em; font-weight: bold; color: #2c3e50; }
         .receipt-info {
             display: flex;
             justify-content: space-between;
             margin: 8px 0;
             font-size: 0.9em;
         }
-        
-        .receipt-items {
-            margin: 15px 0;
-        }
-        
+        .receipt-items { margin: 15px 0; }
         .receipt-item {
             display: flex;
             justify-content: space-between;
             margin: 5px 0;
             padding: 3px 0;
         }
-        
-        .receipt-divider {
-            border-top: 1px dashed #7f8c8d;
-            margin: 10px 0;
-        }
-        
+        .receipt-divider { border-top: 1px dashed #7f8c8d; margin: 10px 0; }
         .receipt-total {
             display: flex;
             justify-content: space-between;
@@ -226,32 +153,11 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        
         .receipt-footer {
             text-align: center;
             margin-top: 20px;
             color: #7f8c8d;
             font-style: italic;
-        }
-        
-        .print-btn {
-            background: linear-gradient(135deg, rgb(219, 173, 168), rgb(204, 149, 177));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 1em;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .print-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(219, 173, 168, 0.4);
         }
     </style>
 </head>
@@ -264,7 +170,7 @@
         
         <div class="content">
             <?php
-            // PERBAIKAN 1: Array dengan kode barang [kode, nama, harga, kategori]
+            // Array barang
             $barang = [
                 ["AT001", "BUKU TULIS", 5000, "Alat Tulis"],
                 ["AT002", "PENSIL 2B", 2000, "Alat Tulis"],
@@ -273,7 +179,7 @@
                 ["AT005", "SPIDOL WHITEBOARD", 7000, "Alat Tulis"]
             ];
 
-            // COMMIT 2 - LOGIKA PEMBELIAN
+            // Logika pembelian acak
             $pembelian = [];
             $grand_total = 0;
             $total_quantity = 0;
@@ -282,32 +188,42 @@
             for ($i = 0; $i < $jumlah_item_dibeli; $i++) {
                 $random_barang = rand(0, 4);
                 $random_jumlah = rand(1, 3);
-                // PERBAIKAN 2: Index harga yang benar adalah [2], bukan [1]
                 $total_item = $barang[$random_barang][2] * $random_jumlah;
                 $grand_total += $total_item;
                 $total_quantity += $random_jumlah;
-                
+
                 $pembelian[] = [
-                    'kode' => $barang[$random_barang][0],  // Kode barang
-                    'nama' => $barang[$random_barang][1],  // Nama barang
-                    'harga' => $barang[$random_barang][2], // Harga barang
+                    'kode' => $barang[$random_barang][0],
+                    'nama' => $barang[$random_barang][1],
+                    'harga' => $barang[$random_barang][2],
                     'jumlah' => $random_jumlah,
                     'total' => $total_item
                 ];
             }
 
-            // Data untuk struk
+            // === LOGIKA DISKON ===
+            if ($grand_total < 50000) {
+                $diskon_persen = 0;
+            } elseif ($grand_total <= 100000) {
+                $diskon_persen = 10;
+            } else {
+                $diskon_persen = 20;
+            }
+
+            $diskon_nilai = ($grand_total * $diskon_persen) / 100;
+            $total_bayar = $grand_total - $diskon_nilai;
+
+            // Data struk
             $transaction_id = "PM" . date('YmdHis') . rand(100, 999);
             $current_date = date('d/m/Y H:i:s');
             ?>
-            
+
             <!-- Daftar Barang -->
             <div class="section">
                 <div class="section-title">📦 DAFTAR BARANG POLGAN MART</div>
                 <div class="product-grid">
                     <?php foreach ($barang as $item): ?>
                     <div class="product-card">
-                        <!-- PERBAIKAN 3: Menampilkan kode barang -->
                         <div class="product-code">Kode: <?= $item[0] ?></div>
                         <div class="product-name"><?= $item[1] ?></div>
                         <div class="product-price">Rp <?= number_format($item[2], 0, ',', '.') ?></div>
@@ -320,10 +236,8 @@
             <!-- Detail Pembelian -->
             <div class="section">
                 <div class="section-title">🛒 DETAIL PEMBELIAN</div>
-                
                 <?php foreach ($pembelian as $item): ?>
                 <div class="transaction-item">
-                    <!-- PERBAIKAN 4: Menampilkan kode barang di transaksi -->
                     <div class="item-code">Kode: <?= $item['kode'] ?></div>
                     <div class="item-name"><?= $item['nama'] ?></div>
                     <div class="item-details">
@@ -334,20 +248,20 @@
                 <?php endforeach; ?>
 
                 <div class="total-box">
-                    TOTAL: Rp <?= number_format($grand_total, 0, ',', '.') ?>
+                    TOTAL: Rp <?= number_format($grand_total, 0, ',', '.') ?><br>
+                    DISKON <?= $diskon_persen ?>% (Rp <?= number_format($diskon_nilai, 0, ',', '.') ?>)<br>
+                    TOTAL BAYAR: Rp <?= number_format($total_bayar, 0, ',', '.') ?>
                 </div>
             </div>
 
             <!-- Struk Belanja -->
             <div class="section">
                 <div class="section-title">🧾 STRUK BELANJA</div>
-                
                 <div class="receipt">
                     <div class="receipt-header">
                         <div class="receipt-title">POLGAN MART</div>
                         <div>Toko Serba Ada</div>
                     </div>
-                    
                     <div class="receipt-info">
                         <span>No. Transaksi:</span>
                         <span><?= $transaction_id ?></span>
@@ -360,9 +274,7 @@
                         <span>Kasir:</span>
                         <span>System Auto</span>
                     </div>
-                    
                     <div class="receipt-divider"></div>
-                    
                     <div class="receipt-items">
                         <?php foreach ($pembelian as $item): ?>
                         <div class="receipt-item">
@@ -371,26 +283,29 @@
                         </div>
                         <?php endforeach; ?>
                     </div>
-                    
                     <div class="receipt-divider"></div>
-                    
                     <div class="receipt-total">
-                        <span>TOTAL:</span>
+                        <span>Subtotal:</span>
                         <span>Rp <?= number_format($grand_total, 0, ',', '.') ?></span>
                     </div>
-                    
+                    <div class="receipt-total">
+                        <span>Diskon (<?= $diskon_persen ?>%)</span>
+                        <span>- Rp <?= number_format($diskon_nilai, 0, ',', '.') ?></span>
+                    </div>
+                    <div class="receipt-total" style="background:#27ae60; color:white;">
+                        <span>Total Bayar:</span>
+                        <span>Rp <?= number_format($total_bayar, 0, ',', '.') ?></span>
+                    </div>
                     <div class="receipt-info">
                         <span>Items:</span>
                         <span><?= $total_quantity ?> pcs</span>
                     </div>
-                    
                     <div class="receipt-footer">
                         Terima kasih atas kunjungan Anda!<br>
                         *** Barang yang sudah dibeli tidak dapat ditukar ***
                     </div>
                 </div>
-                
-              
+            </div>
         </div>
     </div>
 </body>
